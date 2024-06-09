@@ -1,6 +1,6 @@
 const newGame = (function() {
-    let playerOne = { turn: '' };
-    let playerTwo = { turn: '' };
+    let playerOne = {};
+    let playerTwo = {};
     let gameBoard = {
         a1: '',
         a2: '',
@@ -25,22 +25,22 @@ const newGame = (function() {
             // O
             playerTwo.turn = 5;
             // X
-            alert(`Player Two is X! Player one goes first!`)
+            alert(`Player Two is X! Player two goes first!`)
         }
-        while (playerOne.turn > 0 || playerTwo.turn > 0) {
-            let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
-            let boardX = turnX.value;
-            gameBoard.boardX = 'X';
-            playerOne.turn--;
-            alert(`X placed in ${gameBoard.boardX}!   |   ${ {gameBoard} }!`);
-            let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
-            let boardO = turnO.value;
-            gameBoard.boardY = 'O';
-            playerTwo.turn--;
-            alert(`O placed in ${gameBoard.boardPos}!    |   ${ {gameBoard} }`);
+        for (let i in gameBoard) {
+                if (gameBoard[i] == '') {
+                    let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
+                    gameBoard[turnX] = 'X';
+                    alert(`X placed in ${ JSON.stringify(gameBoard) }!`);
+                }
+                if (gameBoard[i] == '') {
+                    let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
+                    gameBoard[turnO] = 'O';
+                    alert(`O placed: Game Board: ${ JSON.stringify(gameBoard) }!`);
+                }
             }
-        }
-    return { playerOne, playerTwo, startRound}
+    }
+    return { playerOne, playerTwo, gameBoard, startRound}
 })();
 
 newGame.startRound()
