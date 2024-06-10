@@ -1,6 +1,6 @@
 const newGame = (function() {
-    let playerOne = {};
-    let playerTwo = {};
+    let playerOne = { goFirst: true, currentTurn: false};
+    let playerTwo = { goFirst: false, currentTurn: false};
     let gameBoard = {
         a1: '',
         a2: '',
@@ -12,48 +12,53 @@ const newGame = (function() {
         c2: '', 
         c3: ''
     };
+let arrKeys = (input) => {
+    let check = Object.keys(gameBoard).filter((e) => {
+        return e.endsWith(input) == [] ? e.startsWith(input) : e.endsWith(input);
+    })
+    return check
+    // Generates an array of game board positions that start or end with an input
+};
 
-    const checkWin = (input) => {
-        return Object.keys(gameBoard).filter((e) => {
-            return e.endsWith(input) == [] ? e.startsWith(input) : e.endsWith(input)
-        });
-    }
-    console.log(checkWin('a'));
-        /*(a) => {
-            return a.indexOf('a') == 0;
-        }).reduce((keysA, a) => {
-            keysA[a] = gameBoard[a];
-            console.log(keysA);
-        }, {});*/
+alert(arrKeys(1))
     const startRound = () => {
-        let randomTurn = Math.floor(Math.random() * 2);
-        if (randomTurn == 1) {
-            playerOne.turn = 5;
-            // X is first
-            playerTwo.turn = 4;
-            // O
-            //alert(`Player One is X! Player one goes first!`)
-        } else {
-            playerOne.turn = 4;
-            // O
-            playerTwo.turn = 5;
-            // X
-            //alert(`Player Two is X! Player two goes first!`)
+        function checkWin() {
+            const checkVal = ['a', 'b', 'c', 1, 2 ,3];
+            for (let i = 0; i < checkVal.length; i++) {
+                //checkVal.forEach((element) => {
+                let checkArr = arrKeys(checkVal[i]);
+                console.table(checkArr);
+                /*checkArr.forEach((key) => {
+                    console.log(key);
+                });*/
+            };
         }
+       /* let randomTurn = Math.floor(Math.random() * 2);
+        randomTurn == 1 ?
+            (playerOne.turn = true,alert(`Player One goes first!`)):
+            (playerTwo.turn = true,alert(`Player Two goes first!`));
+            // Randomizes the first player
         for (let i in gameBoard) {
+            // For-in loop uses the number of spaces in game board to determine number of player turns
                 if (gameBoard[i] == '') {
                     let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
-                    gameBoard[turnX] = 'X';
-                    alert(`X placed in ${ JSON.stringify(gameBoard) }!`);
-                }
+                    if (gameBoard[turnX] == '') {
+                        gameBoard[turnX] = 'X';
+                    } else {
+                        alert(`${JSON.stringify(gameBoard)} already taken!`);
+                    }
                 if (gameBoard[i] == '') {
                     let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
-                    gameBoard[turnO] = 'O';
-                    alert(`O placed: Game Board: ${ JSON.stringify(gameBoard) }!`);
+                    if (gameBoard[turnO] == '') {
+                        gameBoard[turnO] = 'O';
+                    } else {
+                        alert(`${JSON.stringify(gameBoard)} already taken!`);
+                    }
                 }
             }
+        }*/
     }
-    return { playerOne, playerTwo, gameBoard, startRound, checkWin}
+    return { playerOne, playerTwo, gameBoard, startRound}
 })();
 
 newGame.startRound()
