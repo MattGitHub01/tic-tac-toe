@@ -1,7 +1,6 @@
 const newGame = (function() {
     let playerOne = { turn: true, turns: 5, currentTurn: false, moves: ['a1', 'a2', 'a3']};
     let playerTwo = { turn: false, turns: 4, currentTurn: false, moves: []};
-    let counter = 9;
 
     let gameBoard = {
         a1: '',
@@ -33,46 +32,61 @@ const newGame = (function() {
         }
     }*/
 
-    let checkWin = function(player) {
+    let checkWin = function() {
         let winner = false;
         for (let i in winCombos) {
             const winRow = winCombos[i];
-            let placeOne = winRow[0];
-            let placeTwo = winRow[1];
-            let placeThree = winRow[2];
+            let placeOne = gameBoard[winRow[0]];
+            let placeTwo = gameBoard[winRow[1]];
+            let placeThree = gameBoard[winRow[2]];
 
+            if (placeOne == '' || placeTwo == '' || placeThree == '') {
+                continue;
+            }
+            if (placeOne == placeTwo && placeTwo == placeThree) {
+                winner = true;
+                break;
+            }
         }
+        return winner
     }
 
 
-
+    let counter = 9;
     const turn = function() {
-        if (counter > 0) {
-            playerOne.turn = false;
-            playerTwo.turn = true;
-            checkWin(playerOne)
-            let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
-            if (gameBoard[turnX] == '') {
-                gameBoard[turnX] = 'X';
-                playerOne.moves.push(turnX);
-            } else {
-                console.log(`Try Agn`)
-            }
-        counter--;
+        if (counter > 0) 
+            if (playerOne.turn == true) {
+                playerOne.turn = false;
+                playerTwo.turn = true;
+                console.log(checkWin())
+                let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
+                if (gameBoard[turnX] == '') {
+                    gameBoard[turnX] = 'X';
+                    playerOne.moves.push(turnX);
+                    counter--;
+                } else {
+                    alert(`Already taken!`);
+                    playerOne.turn = true;
+                    playerTwo.turn = false;
+                }
+            
         }
-
         if (counter > 0) {
-            playerOne.turn = true;
-            playerTwo.turn = false;
-            checkWin(playerTwo)
-            let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
-            if (gameBoard[turnO] == '') {
-                gameBoard[turnO] = 'O';
-                playerTwo.moves.push(turnO);
-            } else {
-                alert(`Already taken!`);
+            if (playerTwo.turn == true) {
+                playerOne.turn = true;
+                playerTwo.turn = false;
+                console.log(checkWin())
+                let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
+                if (gameBoard[turnO] == '') {
+                    gameBoard[turnO] = 'O';
+                    playerTwo.moves.push(turnO);
+                    counter--;
+                } else {
+                    alert(`Already taken!`);
+                    playerOne.turn = false;
+                    playerTwo.turn = true;
+                }
             }
-            counter--;
         }
     }
 
