@@ -1,18 +1,19 @@
 const newGame = (function() {
-    let playerOne = { turn: true, turns: 5, currentTurn: false, moves: ['a1', 'a2', 'a3']};
+    let playerOne = { turn: true, turns: 5, currentTurn: false, moves: []};
     let playerTwo = { turn: false, turns: 4, currentTurn: false, moves: []};
 
     let gameBoard = {
-        a1: '',
-        a2: '',
-        a3: '',
-        b1: '',
-        b2: '',
-        b3: '',
-        c1: '',
-        c2: '', 
-        c3: ''
+        a1: ``,
+        a2: ``,
+        a3: ``,
+        b1: ``,
+        b2: ``,
+        b3: ``,
+        c1: ``,
+        c2: ``, 
+        c3: ``
     };
+
     const winCombos = [
         [`a1`, `a2`, `a3`],
         [`b1`, `b2`, `b3`],
@@ -23,17 +24,10 @@ const newGame = (function() {
         [`a1`, `b2`, `c3`],
         [`c1`, `b2`, `a3`]
     ];
-    /*const checkWin = function(player) {
-        player.moves(keys).winCombos.some( (check) => {
-            player.moves.includes(check);
-        });
-        if (check == true) {
-            console.log(`${player} wins!`)
-        }
-    }*/
 
+    let playerOneWin = false;
+    let playerTwoWin = false;
     let checkWin = function() {
-        let winner = false;
         for (let i in winCombos) {
             const winRow = winCombos[i];
             let placeOne = gameBoard[winRow[0]];
@@ -43,44 +37,66 @@ const newGame = (function() {
             if (placeOne == '' || placeTwo == '' || placeThree == '') {
                 continue;
             }
-            if (placeOne == placeTwo && placeTwo == placeThree) {
-                winner = true;
-                break;
+            if (placeOne == placeTwo && placeTwo == placeThree && placeOne === 'X') {
+                return playerOneWin = true;
             }
+            if (placeOne == placeTwo && placeTwo == placeThree && placeOne === 'O') {
+                return playerTwoWin = true;
+
+            }
+            // Each winning row should have 3 X's or 3 O's. So iterating through them then aligning each game board position to each winning array position, then checking if it has either an X or an O determines the winner
         }
-        return winner
     }
 
-
-    let counter = 9;
-    const turn = function() {
-        if (counter > 0) 
-            if (playerOne.turn == true) {
+    const startRound = function() {
+        let counter = 9;
+        while (counter >= 0 && playerOneWin == false && playerTwoWin == false) {
+            if (playerOne.turn == true && playerOneWin == false) {
+                if (counter <= 0) {
+                    console.log(`TIE!`);
+                    console.table(`${JSON.stringify(gameBoard)}`);
+                    return
+                }
                 playerOne.turn = false;
                 playerTwo.turn = true;
-                console.log(checkWin())
                 let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
                 if (gameBoard[turnX] == '') {
                     gameBoard[turnX] = 'X';
                     playerOne.moves.push(turnX);
+                    console.log(turnX + ' ' + gameBoard[turnX]);
                     counter--;
+                    checkWin()
+                    if (playerOneWin == true) {
+                        console.log(`Player One Wins!`)
+                        counter = 0;
+                        break
+                    }
                 } else {
                     alert(`Already taken!`);
                     playerOne.turn = true;
                     playerTwo.turn = false;
+                }   
+            }
+            if (playerTwo.turn == true && playerTwoWin == false) {
+                if (counter <= 0) {
+                    console.log(`TIE!`);
+                    console.table(`${JSON.stringify(gameBoard)}`);
+                    return
                 }
-            
-        }
-        if (counter > 0) {
-            if (playerTwo.turn == true) {
                 playerOne.turn = true;
                 playerTwo.turn = false;
-                console.log(checkWin())
                 let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
                 if (gameBoard[turnO] == '') {
                     gameBoard[turnO] = 'O';
+                    console.log(turnO + ' ' + gameBoard[turnO]);
                     playerTwo.moves.push(turnO);
                     counter--;
+                    checkWin()
+                    if (playerTwoWin == true) {
+                        counter = 0;
+                        console.log(`Player Two Wins!`);
+                        break
+                    }
                 } else {
                     alert(`Already taken!`);
                     playerOne.turn = false;
@@ -90,15 +106,15 @@ const newGame = (function() {
         }
     }
 
-const startRound = function() {
-        while (counter > 0) {
-            turn()
-        }
-    }
+
     return { playerOne, playerTwo, gameBoard, startRound}
 })();
-
-newGame.startRound()
+const container = document.querySelector('.container');
+const button = document.querySelector('.button');
+button.textContent = 'Play Tic-Tac-Toe!';
+button.addEventListener('click' , () => {
+    newGame.startRound()
+})
 
         /*function checkWin() {
             const checkVal = ['a', 'b', 'c', 1, 2, 3];
