@@ -1,6 +1,8 @@
 const newGame = (function() {
-    let playerOne = { goFirst: true, currentTurn: false};
-    let playerTwo = { goFirst: false, currentTurn: false};
+    let playerOne = { turn: true, turns: 5, currentTurn: false, moves: []};
+    let playerTwo = { turn: false, turns: 4, currentTurn: false, moves: []};
+    let counter = 9;
+
     let gameBoard = {
         a1: '',
         a2: '',
@@ -12,21 +14,68 @@ const newGame = (function() {
         c2: '', 
         c3: ''
     };
-    const startRound = () => {
-        function checkWin() {
-            let gameBoard = {
-                a1: '',
-                a2: '',
-                a3: '',
-                b1: '',
-                b2: '',
-                b3: '',
-                c1: '',
-                c2: '', 
-                c3: ''
-            };
+    const winCombos = [
+        [`a1`, `a2`, `a3`],
+        [`b1`, `b2`, `b3`],
+        [`c1`, `c2`, `c3`],
+        [`a1`, `b1`, `c1`],
+        [`a2`, `b2`, `c2`],
+        [`a3`, `b3`, `c3`],
+        [`a1`, `b2`, `c3`],
+        [`c1`, `b2`, `a3`]
+    ];
+    const checkWin = function(player) {
+        let check = winCombos.some( (check) => {
+            player.moves.includes(check);
+        });
+        if (check == true) {
+            console.log(`${player} wins!`)
+        }
+    }
 
-            
+    const turn = function() {
+        if (counter > 0) {
+            playerOne.turn = false;
+            playerTwo.turn = true;
+
+            let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
+            if (gameBoard[turnX] == '') {
+                gameBoard[turnX] = 'X';
+                playerOne.moves.push(turnX);
+                console.log(playerOne.moves);
+            } else {
+                console.log(`Try Agn`)
+            }
+        counter--;
+        }
+
+        if (counter > 0) {
+            playerOne.turn = true;
+            playerTwo.turn = false;
+            checkWin(playerOne)
+            let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
+            if (gameBoard[turnO] == '') {
+                gameBoard[turnO] = 'O';
+                playerTwo.moves.push(turnO);
+                console.log(playerTwo.moves);
+            } else {
+                alert(`Already taken!`);
+            }
+            counter--;
+        }
+    }
+
+const startRound = function() {
+        while (counter > 0) {
+            turn()
+        }
+    }
+    return { playerOne, playerTwo, gameBoard, startRound}
+})();
+
+newGame.startRound()
+
+        /*function checkWin() {
             const checkVal = ['a', 'b', 'c', 1, 2, 3];
             checkVal.forEach((pos) => {
                 let arrKeys = (element) => {
@@ -44,36 +93,6 @@ const newGame = (function() {
                     return keyArr[i]
                 }
             })
-
         }
         checkWin()
-    }
-       /* let randomTurn = Math.floor(Math.random() * 2);
-        randomTurn == 1 ?
-            (playerOne.turn = true,alert(`Player One goes first!`)):
-            (playerTwo.turn = true,alert(`Player Two goes first!`));
-            // Randomizes the first player
-        for (let i in gameBoard) {
-            // For-in loop uses the number of spaces in game board to determine number of player turns
-                if (gameBoard[i] == '') {
-                    let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
-                    if (gameBoard[turnX] == '') {
-                        gameBoard[turnX] = 'X';
-                    } else {
-                        alert(`${JSON.stringify(gameBoard)} already taken!`);
-                    }
-                if (gameBoard[i] == '') {
-                    let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
-                    if (gameBoard[turnO] == '') {
-                        gameBoard[turnO] = 'O';
-                    } else {
-                        alert(`${JSON.stringify(gameBoard)} already taken!`);
-                    }
-                }
-            }
-        }
-    }*/
-    return { playerOne, playerTwo, gameBoard, startRound}
-})();
-
-newGame.startRound()
+        */
