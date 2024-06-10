@@ -1,5 +1,5 @@
 const newGame = (function() {
-    let playerOne = { turn: true, turns: 5, currentTurn: false, moves: []};
+    let playerOne = { turn: true, turns: 5, currentTurn: false, moves: ['a1', 'a2', 'a3']};
     let playerTwo = { turn: false, turns: 4, currentTurn: false, moves: []};
     let counter = 9;
 
@@ -24,25 +24,38 @@ const newGame = (function() {
         [`a1`, `b2`, `c3`],
         [`c1`, `b2`, `a3`]
     ];
-    const checkWin = function(player) {
-        let check = winCombos.some( (check) => {
+    /*const checkWin = function(player) {
+        player.moves(keys).winCombos.some( (check) => {
             player.moves.includes(check);
         });
         if (check == true) {
             console.log(`${player} wins!`)
         }
+    }*/
+
+    let checkWin = function(player) {
+        let checkCombo = [];
+        let checkPlayer = [];
+        let check = 0;
+        let pMoves = player.moves;
+        console.log(pMoves);
+        winCombos.forEach((x) => {
+            console.log(x);
+            console.log(x.includes(pMoves));
+        });
     }
+
+
 
     const turn = function() {
         if (counter > 0) {
             playerOne.turn = false;
             playerTwo.turn = true;
-
+            checkWin(playerOne)
             let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
             if (gameBoard[turnX] == '') {
                 gameBoard[turnX] = 'X';
                 playerOne.moves.push(turnX);
-                console.log(playerOne.moves);
             } else {
                 console.log(`Try Agn`)
             }
@@ -52,12 +65,11 @@ const newGame = (function() {
         if (counter > 0) {
             playerOne.turn = true;
             playerTwo.turn = false;
-            checkWin(playerOne)
+            checkWin(playerTwo)
             let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
             if (gameBoard[turnO] == '') {
                 gameBoard[turnO] = 'O';
                 playerTwo.moves.push(turnO);
-                console.log(playerTwo.moves);
             } else {
                 alert(`Already taken!`);
             }
