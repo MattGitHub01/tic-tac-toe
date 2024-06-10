@@ -13,14 +13,18 @@ const newGame = (function() {
         c3: ''
     };
 
-    const checkWin = () => {
-        Object.keys(gameBoard).filter((e) => {
-            return e.indexOf('a') == 0;
-        }).reduce((keysA, e) => {
-            keysA[e] = gameBoard[e];
+    const checkWin = (input) => {
+        return Object.keys(gameBoard).filter((e) => {
+            return e.endsWith(input) == [] ? e.startsWith(input) : e.endsWith(input)
+        });
+    }
+    console.log(checkWin('a'));
+        /*(a) => {
+            return a.indexOf('a') == 0;
+        }).reduce((keysA, a) => {
+            keysA[a] = gameBoard[a];
             console.log(keysA);
-        }, {});
-    };
+        }, {});*/
     const startRound = () => {
         let randomTurn = Math.floor(Math.random() * 2);
         if (randomTurn == 1) {
@@ -36,7 +40,7 @@ const newGame = (function() {
             // X
             //alert(`Player Two is X! Player two goes first!`)
         }
-       /* for (let i in gameBoard) {
+        for (let i in gameBoard) {
                 if (gameBoard[i] == '') {
                     let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
                     gameBoard[turnX] = 'X';
@@ -47,9 +51,9 @@ const newGame = (function() {
                     gameBoard[turnO] = 'O';
                     alert(`O placed: Game Board: ${ JSON.stringify(gameBoard) }!`);
                 }
-            }*/
+            }
     }
     return { playerOne, playerTwo, gameBoard, startRound, checkWin}
 })();
 
-newGame.checkWin()
+newGame.startRound()
