@@ -51,81 +51,107 @@ const newGame = (function() {
         }
     }
 
+    let boardKeys = Object.keys(gameBoard);
     const userInterface = function() {
         const container = document.querySelector('.container');
+
+        const displayArea = document.createElement('div');
+        displayArea.classList.add('display-area');
+        container.appendChild(displayArea);
 
         const gridContainer = document.createElement('div');
         gridContainer.classList.add('grid-container');
         container.appendChild(gridContainer);
-        divAmt = 9;
+        let divAmt = 9;
+        let gmeBrdPos = 0;
+        let turns = 9;
         while (divAmt > 0) {
-            const gridDiv = document.createElement('div');
-            gridDiv.textContent = '';
+            let gridPosition = boardKeys[gmeBrdPos];
+            console.log(gridPosition);
+            gmeBrdPos++;
+            const gridDiv = document.createElement('div')
             gridDiv.classList.add('grid-div');
+            gridDiv.addEventListener('click', () =>{
+                if (playerOne.turn == true && gridDiv.textContent == '' && turns > 0 && playerOneWin == false) {
+                    gridDiv.textContent = `X`;
+                    playerOne.turn = false;
+                    playerTwo.turn = true;
+                    let turnX = gridPosition;
+                    if (gameBoard[turnX] == '') {
+                        gameBoard[turnX] = 'X';
+                        playerOne.moves.push(turnX);
+                        turns--
+                    }
+                    console.log(playerOne.moves);
+                    checkWin()
+                    console.log(playerOneWin);
+                    if (playerOneWin == true) {
+                        turns = 0;
+                        displayArea.textContent = `Player One Wins!`;
+                    }
+                    if (playerTwoWin == true) {
+                        turns = 0;
+                        displayArea.textContent = `Player Two Wins!`;
+                    }
+                }
+                if (playerTwo.turn == true && gridDiv.textContent == '' && turns > 0 && playerTwoWin == false) {
+                    gridDiv.textContent = `O`;
+                    playerOne.turn = true;
+                    playerTwo.turn = false;
+                    let turnO = gridPosition;
+                    if (gameBoard[turnO] == '') {
+                        gameBoard[turnO] = 'O';
+                        playerTwo.moves.push(turnO);
+                        turns--
+                    }
+                    console.log(playerTwo.moves);
+                    checkWin()
+                    console.log(playerTwoWin);
+                    if (playerOneWin == true) {
+                        turns = 0;
+                        displayArea.textContent = `Player One Wins!`;
+                    }
+                    if (playerTwoWin == true) {
+                        turns = 0;
+                        displayArea.textContent = `Player Two Wins!`;
+                    }
+                } 
+            });
             gridContainer.appendChild(gridDiv);
             divAmt--
         }
-
-        
     }
 
     const startRound = function() {
-        let counter = 9;
+
         while (counter >= 0 && playerOneWin == false && playerTwoWin == false) {
             if (playerOne.turn == true && playerOneWin == false) {
                 if (counter <= 0) {
-                    console.log(`TIE!`);
-                    console.table(`${JSON.stringify(gameBoard)}`);
+                    //displayArea.textContent = `Tie!`;
                     return
                 }
-                playerOne.turn = false;
-                playerTwo.turn = true;
-                let turnX = prompt(`Player One: Enter the board position you wish to play: (example: B1) `);
-                if (gameBoard[turnX] == '') {
-                    gameBoard[turnX] = 'X';
-                    playerOne.moves.push(turnX);
-                    console.log(turnX + ' ' + gameBoard[turnX]);
-                    counter--;
                     checkWin()
                     if (playerOneWin == true) {
-                        console.log(`Player One Wins!`)
+                        console.log(`Player One Wins!`) // CHANGE
                         counter = 0;
-                        break
                     }
-                } else {
-                    alert(`Already taken!`);
-                    playerOne.turn = true;
-                    playerTwo.turn = false;
-                }   
+                } 
             }
             if (playerTwo.turn == true && playerTwoWin == false) {
                 if (counter <= 0) {
-                    console.log(`TIE!`);
-                    console.table(`${JSON.stringify(gameBoard)}`);
+                    //displayArea.textContent = "Tie!";
                     return
                 }
-                playerOne.turn = true;
-                playerTwo.turn = false;
-                let turnO = prompt(`Player Two: Enter the board position you wish to play: (example: B1) `);
-                if (gameBoard[turnO] == '') {
-                    gameBoard[turnO] = 'O';
-                    console.log(turnO + ' ' + gameBoard[turnO]);
-                    playerTwo.moves.push(turnO);
-                    counter--;
+
                     checkWin()
                     if (playerTwoWin == true) {
                         counter = 0;
-                        console.log(`Player Two Wins!`);
-                        break
+                        console.log(`Player Two Wins!`); // CHANGE
+
                     }
-                } else {
-                    alert(`Already taken!`);
-                    playerOne.turn = false;
-                    playerTwo.turn = true;
                 }
-            }
-        }
     }
+
 
 
     return { playerOne, playerTwo, gameBoard, startRound, userInterface}
