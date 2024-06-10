@@ -34,15 +34,14 @@ const newGame = (function() {
     }*/
 
     let checkWin = function(player) {
-        let checkCombo = [];
-        let checkPlayer = [];
-        let check = 0;
-        let pMoves = player.moves;
-        console.log(pMoves);
-        winCombos.forEach((x) => {
-            console.log(x);
-            console.log(x.includes(pMoves));
-        });
+        let winner = false;
+        for (let i in winCombos) {
+            const winRow = winCombos[i];
+            let placeOne = winRow[0];
+            let placeTwo = winRow[1];
+            let placeThree = winRow[2];
+
+        }
     }
 
 
