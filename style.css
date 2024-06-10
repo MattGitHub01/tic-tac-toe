@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.grid-container {
+    display: grid;
+    height: 30rem;
+    width: 30rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.grid-div {
+    box-sizing: border-box;
+    width: 10rem;
+    height: 10rem;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.grid-div:nth-child(3n) {
+    border-right: none;
+}
+
+.grid-div:nth-child(n+7) {
+    border-bottom: none;
+}

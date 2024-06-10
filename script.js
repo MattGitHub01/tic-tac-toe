@@ -1,7 +1,8 @@
 const newGame = (function() {
     let playerOne = { turn: true, turns: 5, currentTurn: false, moves: []};
     let playerTwo = { turn: false, turns: 4, currentTurn: false, moves: []};
-
+    // Player objects
+    
     let gameBoard = {
         a1: ``,
         a2: ``,
@@ -13,6 +14,7 @@ const newGame = (function() {
         c2: ``, 
         c3: ``
     };
+    // The tic-tac-toe grid as an object
 
     const winCombos = [
         [`a1`, `a2`, `a3`],
@@ -24,6 +26,7 @@ const newGame = (function() {
         [`a1`, `b2`, `c3`],
         [`c1`, `b2`, `a3`]
     ];
+    // Array of winning game positions
 
     let playerOneWin = false;
     let playerTwoWin = false;
@@ -46,6 +49,24 @@ const newGame = (function() {
             }
             // Each winning row should have 3 X's or 3 O's. So iterating through them then aligning each game board position to each winning array position, then checking if it has either an X or an O determines the winner
         }
+    }
+
+    const userInterface = function() {
+        const container = document.querySelector('.container');
+
+        const gridContainer = document.createElement('div');
+        gridContainer.classList.add('grid-container');
+        container.appendChild(gridContainer);
+        divAmt = 9;
+        while (divAmt > 0) {
+            const gridDiv = document.createElement('div');
+            gridDiv.textContent = '';
+            gridDiv.classList.add('grid-div');
+            gridContainer.appendChild(gridDiv);
+            divAmt--
+        }
+
+        
     }
 
     const startRound = function() {
@@ -107,33 +128,7 @@ const newGame = (function() {
     }
 
 
-    return { playerOne, playerTwo, gameBoard, startRound}
+    return { playerOne, playerTwo, gameBoard, startRound, userInterface}
 })();
-const container = document.querySelector('.container');
-const button = document.querySelector('.button');
-button.textContent = 'Play Tic-Tac-Toe!';
-button.addEventListener('click' , () => {
-    newGame.startRound()
-})
 
-        /*function checkWin() {
-            const checkVal = ['a', 'b', 'c', 1, 2, 3];
-            checkVal.forEach((pos) => {
-                let arrKeys = (element) => {
-                    element = pos;
-                    let check = Object.keys(gameBoard).filter((e) => {
-                        return e.endsWith(element) == [] ? e.startsWith(element) : e.endsWith(element);
-                    })
-                    return check
-                    // Generates an array of game board positions that start or end with an input
-                }
-                arrKeys()
-                let currentVal = pos.value;
-                let keyArr = arrKeys();
-                for (let i in keyArr) {
-                    return keyArr[i]
-                }
-            })
-        }
-        checkWin()
-        */
+newGame.userInterface()
