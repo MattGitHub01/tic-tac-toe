@@ -12,27 +12,42 @@ const newGame = (function() {
         c2: '', 
         c3: ''
     };
-let arrKeys = (input) => {
-    let check = Object.keys(gameBoard).filter((e) => {
-        return e.endsWith(input) == [] ? e.startsWith(input) : e.endsWith(input);
-    })
-    return check
-    // Generates an array of game board positions that start or end with an input
-};
-
-alert(arrKeys(1))
     const startRound = () => {
         function checkWin() {
-            const checkVal = ['a', 'b', 'c', 1, 2 ,3];
-            for (let i = 0; i < checkVal.length; i++) {
-                //checkVal.forEach((element) => {
-                let checkArr = arrKeys(checkVal[i]);
-                console.table(checkArr);
-                /*checkArr.forEach((key) => {
-                    console.log(key);
-                });*/
+            let gameBoard = {
+                a1: '',
+                a2: '',
+                a3: '',
+                b1: '',
+                b2: '',
+                b3: '',
+                c1: '',
+                c2: '', 
+                c3: ''
             };
+
+            
+            const checkVal = ['a', 'b', 'c', 1, 2, 3];
+            checkVal.forEach((pos) => {
+                let arrKeys = (element) => {
+                    element = pos;
+                    let check = Object.keys(gameBoard).filter((e) => {
+                        return e.endsWith(element) == [] ? e.startsWith(element) : e.endsWith(element);
+                    })
+                    return check
+                    // Generates an array of game board positions that start or end with an input
+                }
+                arrKeys()
+                let currentVal = pos.value;
+                let keyArr = arrKeys();
+                for (let i in keyArr) {
+                    return keyArr[i]
+                }
+            })
+
         }
+        checkWin()
+    }
        /* let randomTurn = Math.floor(Math.random() * 2);
         randomTurn == 1 ?
             (playerOne.turn = true,alert(`Player One goes first!`)):
@@ -56,8 +71,8 @@ alert(arrKeys(1))
                     }
                 }
             }
-        }*/
-    }
+        }
+    }*/
     return { playerOne, playerTwo, gameBoard, startRound}
 })();
 
