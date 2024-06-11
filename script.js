@@ -57,6 +57,7 @@ const newGame = (function() {
 
         const displayArea = document.createElement('div');
         displayArea.classList.add('display-area');
+        displayArea.textContent = 'Tic-Tac-Toe!';
         container.appendChild(displayArea);
 
         const gridContainer = document.createElement('div');
@@ -73,7 +74,9 @@ const newGame = (function() {
             gridDiv.classList.add('grid-div');
             gridDiv.addEventListener('click', () =>{
                 if (playerOne.turn == true && gridDiv.textContent == '' && turns > 0 && playerOneWin == false) {
-                    gridDiv.textContent = `X`;
+                    const gridDivText = document.createElement('span');
+                    gridDivText.textContent = `X`;
+                    gridDiv.appendChild(gridDivText)
                     playerOne.turn = false;
                     playerTwo.turn = true;
                     let turnX = gridPosition;
@@ -93,9 +96,14 @@ const newGame = (function() {
                         turns = 0;
                         displayArea.textContent = `Player Two Wins!`;
                     }
+                    if (turns <= 0) {
+                        displayArea.textContent = `Tie!`;
+                    }
                 }
                 if (playerTwo.turn == true && gridDiv.textContent == '' && turns > 0 && playerTwoWin == false) {
-                    gridDiv.textContent = `O`;
+                    const gridDivText = document.createElement('span');
+                    gridDivText.textContent = `O`;
+                    gridDiv.appendChild(gridDivText)
                     playerOne.turn = true;
                     playerTwo.turn = false;
                     let turnO = gridPosition;
@@ -115,6 +123,9 @@ const newGame = (function() {
                         turns = 0;
                         displayArea.textContent = `Player Two Wins!`;
                     }
+                    if (turns <= 0) {
+                        displayArea.textContent = `Tie!`;
+                    }
                 } 
             });
             gridContainer.appendChild(gridDiv);
@@ -122,39 +133,7 @@ const newGame = (function() {
         }
     }
 
-    const startRound = function() {
-
-        while (counter >= 0 && playerOneWin == false && playerTwoWin == false) {
-            if (playerOne.turn == true && playerOneWin == false) {
-                if (counter <= 0) {
-                    //displayArea.textContent = `Tie!`;
-                    return
-                }
-                    checkWin()
-                    if (playerOneWin == true) {
-                        console.log(`Player One Wins!`) // CHANGE
-                        counter = 0;
-                    }
-                } 
-            }
-            if (playerTwo.turn == true && playerTwoWin == false) {
-                if (counter <= 0) {
-                    //displayArea.textContent = "Tie!";
-                    return
-                }
-
-                    checkWin()
-                    if (playerTwoWin == true) {
-                        counter = 0;
-                        console.log(`Player Two Wins!`); // CHANGE
-
-                    }
-                }
-    }
-
-
-
-    return { playerOne, playerTwo, gameBoard, startRound, userInterface}
+    return { playerOne, playerTwo, gameBoard, userInterface}
 })();
 
 newGame.userInterface()
