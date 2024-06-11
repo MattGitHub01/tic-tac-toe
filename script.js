@@ -94,6 +94,24 @@ const newGame = (function() {
         nameOneInput.setAttribute('required','');
         liOne.appendChild(nameOneInput);
 
+        const liTwo = document.createElement('li');
+        liTwo.classList.add('form-li-two');
+        ul.appendChild(liTwo);
+
+        const nameTwoLabel = document.createElement('label');
+        nameTwoLabel.setAttribute('for', 'name-two');
+        nameTwoLabel.textContent = 'Player One Name';
+        liOne.appendChild(nameTwoLabel);
+
+        const nameTwoInput = document.createElement('input');
+        nameTwoInput.setAttribute('type','text');
+        nameTwoInput.setAttribute('id', 'name-two');
+        nameTwoInput.setAttribute('name', 'name-two');
+        nameTwoInput.setAttribute('id', 'name-two');
+        nameTwoInput.setAttribute('required','');
+        liTwo.appendChild(nameTwoInput);
+
+
         const gridContainer = document.createElement('div');
         gridContainer.classList.add('grid-container');
         contentContainer.appendChild(gridContainer);
