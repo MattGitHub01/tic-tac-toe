@@ -70,6 +70,8 @@ const newGame = (function() {
         let divAmt = 9;
         let gmeBrdPos = 0;
         let turns = 9;
+        let playerOneName = 'Player One';
+        let playerTwoName = 'Player Two';
         while (divAmt > 0) {
             let gridPosition = boardKeys[gmeBrdPos];
             console.log(gridPosition);
@@ -94,7 +96,7 @@ const newGame = (function() {
                     console.log(playerOneWin);
                     if (playerOneWin == true) {
                         turns = 0;
-                        displayArea.textContent = `Player One Wins!`;
+                        displayArea.textContent = `${playerOneName} Wins!`;
                     }
                     if (playerTwoWin == true) {
                         turns = 0;
@@ -155,7 +157,7 @@ const newGame = (function() {
         const nameOneLabel = document.createElement('label');
         nameOneLabel.classList.add('label-one');
         nameOneLabel.setAttribute('for', 'name-one');
-        nameOneLabel.textContent = 'Player One Name';
+        nameOneLabel.textContent = 'Enter Player One Name:';
         liOne.appendChild(nameOneLabel);
 
         const nameOneInput = document.createElement('input');
@@ -177,7 +179,7 @@ const newGame = (function() {
 
         const nameTwoLabel = document.createElement('label');
         nameTwoLabel.setAttribute('for', 'name-two');
-        nameTwoLabel.textContent = 'Player Two Name';
+        nameTwoLabel.textContent = 'Enter Player Two Name:';
         liTwo.appendChild(nameTwoLabel);
 
         const nameTwoInput = document.createElement('input');
