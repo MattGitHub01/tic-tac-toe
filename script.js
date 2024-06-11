@@ -136,6 +136,7 @@ const newGame = (function() {
             gridContainer.appendChild(gridDiv);
             divAmt--
         }
+
         const nameFormDiv = document.createElement('div');
         nameFormDiv.classList.add('form-div');
         contentContainer.appendChild(nameFormDiv);
@@ -162,9 +163,14 @@ const newGame = (function() {
         nameOneInput.setAttribute('id', 'name-one');
         nameOneInput.setAttribute('name', 'name-one');
         nameOneInput.setAttribute('id', 'name-one');
-        nameOneInput.setAttribute('required','');
         nameOneInput.setAttribute('min-width','200px');
         liOne.appendChild(nameOneInput);
+
+        const nameOneButton = document.createElement('button');
+        nameOneButton.setAttribute('type', 'submit');
+        nameOneButton.setAttribute('name', 'name-one');
+        nameOneButton.textContent = 'Enter!';
+        liOne.appendChild(nameOneButton);
 
         const liTwo = document.createElement('li');
         ul.appendChild(liTwo);
@@ -179,10 +185,14 @@ const newGame = (function() {
         nameTwoInput.setAttribute('id', 'name-two');
         nameTwoInput.setAttribute('name', 'name-two');
         nameTwoInput.setAttribute('id', 'name-two');
-        nameTwoInput.setAttribute('required','');
-        nameOneInput.setAttribute('min-width','200px');
+        nameOneInput.setAttribute('min-width','100px');
         liTwo.appendChild(nameTwoInput);
 
+        const nameTwoButton = document.createElement('button');
+        nameTwoButton.setAttribute('type', 'submit');
+        nameTwoButton.setAttribute('name', 'name-two');
+        nameTwoButton.textContent = 'Enter!';
+        liTwo.appendChild(nameTwoButton);
     }
 
     return { playerOne, playerTwo, gameBoard, userInterface}

@@ -7,6 +7,10 @@ body {
 }
 
 ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     margin-top: 5rem;
     list-style-type: none;
 }
@@ -18,6 +22,10 @@ li {
 
 label {
     margin-right: 2rem;
+}
+
+button {
+    margin-left: 1rem;
 }
 
 .container {
@@ -51,8 +59,8 @@ label {
 .grid-container {
     grid-column: 2 / 3;
     display: grid;
-    height: 30rem;
-    width: 30rem;
+    height: 24rem;
+    width: 24rem;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 }
