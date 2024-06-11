@@ -96,7 +96,7 @@ const newGame = (function() {
                         turns = 0;
                         displayArea.textContent = `Player Two Wins!`;
                     }
-                    if (turns <= 0) {
+                    if (turns <= 0 && playerOneWin == false) {
                         displayArea.textContent = `Tie!`;
                     }
                 }
@@ -123,7 +123,8 @@ const newGame = (function() {
                         turns = 0;
                         displayArea.textContent = `Player Two Wins!`;
                     }
-                    if (turns <= 0) {
+                    if (turns <= 0 && playerOneWin == false) {
+
                         displayArea.textContent = `Tie!`;
                     }
                 } 
