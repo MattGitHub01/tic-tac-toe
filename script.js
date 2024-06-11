@@ -64,54 +64,6 @@ const newGame = (function() {
         contentContainer.classList.add('content-container');
         container.appendChild(contentContainer);
 
-        const nameFormDiv = document.createElement('div');
-        nameFormDiv.classList.add('name-form-div');
-        contentContainer.appendChild(nameFormDiv);
-
-        const nameForm = document.createElement('form');
-        nameForm.classList.add('name-form');
-        nameForm.setAttribute('id', 'name-form');
-        nameFormDiv.appendChild(nameForm);
-
-        const ul = document.createElement('ul');
-        ul.classList.add('form-ul');
-        nameForm.appendChild(ul);
-        // Below i can copy paste to make form
-        const liOne = document.createElement('li');
-        liOne.classList.add('form-li-one');
-        ul.appendChild(liOne);
-
-        const nameOneLabel = document.createElement('label');
-        nameOneLabel.setAttribute('for', 'name-one');
-        nameOneLabel.textContent = 'Player One Name';
-        liOne.appendChild(nameOneLabel);
-
-        const nameOneInput = document.createElement('input');
-        nameOneInput.setAttribute('type','text');
-        nameOneInput.setAttribute('id', 'name-one');
-        nameOneInput.setAttribute('name', 'name-one');
-        nameOneInput.setAttribute('id', 'name-one');
-        nameOneInput.setAttribute('required','');
-        liOne.appendChild(nameOneInput);
-
-        const liTwo = document.createElement('li');
-        liTwo.classList.add('form-li-two');
-        ul.appendChild(liTwo);
-
-        const nameTwoLabel = document.createElement('label');
-        nameTwoLabel.setAttribute('for', 'name-two');
-        nameTwoLabel.textContent = 'Player One Name';
-        liOne.appendChild(nameTwoLabel);
-
-        const nameTwoInput = document.createElement('input');
-        nameTwoInput.setAttribute('type','text');
-        nameTwoInput.setAttribute('id', 'name-two');
-        nameTwoInput.setAttribute('name', 'name-two');
-        nameTwoInput.setAttribute('id', 'name-two');
-        nameTwoInput.setAttribute('required','');
-        liTwo.appendChild(nameTwoInput);
-
-
         const gridContainer = document.createElement('div');
         gridContainer.classList.add('grid-container');
         contentContainer.appendChild(gridContainer);
@@ -184,6 +136,53 @@ const newGame = (function() {
             gridContainer.appendChild(gridDiv);
             divAmt--
         }
+        const nameFormDiv = document.createElement('div');
+        nameFormDiv.classList.add('form-div');
+        contentContainer.appendChild(nameFormDiv);
+
+        const nameForm = document.createElement('form');
+        nameForm.classList.add('name-form');
+        nameForm.setAttribute('id', 'name-form');
+        nameFormDiv.appendChild(nameForm);
+
+        const ul = document.createElement('ul');
+        nameForm.appendChild(ul);
+
+        const liOne = document.createElement('li');
+        ul.appendChild(liOne);
+
+        const nameOneLabel = document.createElement('label');
+        nameOneLabel.classList.add('label-one');
+        nameOneLabel.setAttribute('for', 'name-one');
+        nameOneLabel.textContent = 'Player One Name';
+        liOne.appendChild(nameOneLabel);
+
+        const nameOneInput = document.createElement('input');
+        nameOneInput.setAttribute('type','text');
+        nameOneInput.setAttribute('id', 'name-one');
+        nameOneInput.setAttribute('name', 'name-one');
+        nameOneInput.setAttribute('id', 'name-one');
+        nameOneInput.setAttribute('required','');
+        nameOneInput.setAttribute('min-width','200px');
+        liOne.appendChild(nameOneInput);
+
+        const liTwo = document.createElement('li');
+        ul.appendChild(liTwo);
+
+        const nameTwoLabel = document.createElement('label');
+        nameTwoLabel.setAttribute('for', 'name-two');
+        nameTwoLabel.textContent = 'Player Two Name';
+        liTwo.appendChild(nameTwoLabel);
+
+        const nameTwoInput = document.createElement('input');
+        nameTwoInput.setAttribute('type','text');
+        nameTwoInput.setAttribute('id', 'name-two');
+        nameTwoInput.setAttribute('name', 'name-two');
+        nameTwoInput.setAttribute('id', 'name-two');
+        nameTwoInput.setAttribute('required','');
+        nameOneInput.setAttribute('min-width','200px');
+        liTwo.appendChild(nameTwoInput);
+
     }
 
     return { playerOne, playerTwo, gameBoard, userInterface}
