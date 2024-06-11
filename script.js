@@ -1,6 +1,6 @@
 const newGame = (function() {
-    let playerOne = { turn: true, turns: 5, currentTurn: false, moves: []};
-    let playerTwo = { turn: false, turns: 4, currentTurn: false, moves: []};
+    let playerOne = { name: 'Player One', turn: true, turns: 5, currentTurn: false, moves: []};
+    let playerTwo = { name: 'Player two', turn: false, turns: 4, currentTurn: false, moves: []};
     // Player objects
     
     let gameBoard = {
@@ -50,6 +50,7 @@ const newGame = (function() {
             // Each winning row should have 3 X's or 3 O's. So iterating through them then aligning each game board position to each winning array position, then checking if it has either an X or an O determines the winner
         }
     }
+    const nameButton = document.createElement('button');
 
     let boardKeys = Object.keys(gameBoard);
     const userInterface = function() {
@@ -70,8 +71,9 @@ const newGame = (function() {
         let divAmt = 9;
         let gmeBrdPos = 0;
         let turns = 9;
-        let playerOneName = 'Player One';
-        let playerTwoName = 'Player Two';
+
+        // Set button event listeners early to alter player name variables
+
         while (divAmt > 0) {
             let gridPosition = boardKeys[gmeBrdPos];
             console.log(gridPosition);
@@ -96,7 +98,7 @@ const newGame = (function() {
                     console.log(playerOneWin);
                     if (playerOneWin == true) {
                         turns = 0;
-                        displayArea.textContent = `${playerOneName} Wins!`;
+                        displayArea.textContent = `Player One Wins!`;
                     }
                     if (playerTwoWin == true) {
                         turns = 0;
@@ -139,62 +141,6 @@ const newGame = (function() {
             divAmt--
         }
 
-        const nameFormDiv = document.createElement('div');
-        nameFormDiv.classList.add('form-div');
-        contentContainer.appendChild(nameFormDiv);
-
-        const nameForm = document.createElement('form');
-        nameForm.classList.add('name-form');
-        nameForm.setAttribute('id', 'name-form');
-        nameFormDiv.appendChild(nameForm);
-
-        const ul = document.createElement('ul');
-        nameForm.appendChild(ul);
-
-        const liOne = document.createElement('li');
-        ul.appendChild(liOne);
-
-        const nameOneLabel = document.createElement('label');
-        nameOneLabel.classList.add('label-one');
-        nameOneLabel.setAttribute('for', 'name-one');
-        nameOneLabel.textContent = 'Enter Player One Name:';
-        liOne.appendChild(nameOneLabel);
-
-        const nameOneInput = document.createElement('input');
-        nameOneInput.setAttribute('type','text');
-        nameOneInput.setAttribute('id', 'name-one');
-        nameOneInput.setAttribute('name', 'name-one');
-        nameOneInput.setAttribute('id', 'name-one');
-        nameOneInput.setAttribute('min-width','200px');
-        liOne.appendChild(nameOneInput);
-
-        const nameOneButton = document.createElement('button');
-        nameOneButton.setAttribute('type', 'submit');
-        nameOneButton.setAttribute('name', 'name-one');
-        nameOneButton.textContent = 'Enter!';
-        liOne.appendChild(nameOneButton);
-
-        const liTwo = document.createElement('li');
-        ul.appendChild(liTwo);
-
-        const nameTwoLabel = document.createElement('label');
-        nameTwoLabel.setAttribute('for', 'name-two');
-        nameTwoLabel.textContent = 'Enter Player Two Name:';
-        liTwo.appendChild(nameTwoLabel);
-
-        const nameTwoInput = document.createElement('input');
-        nameTwoInput.setAttribute('type','text');
-        nameTwoInput.setAttribute('id', 'name-two');
-        nameTwoInput.setAttribute('name', 'name-two');
-        nameTwoInput.setAttribute('id', 'name-two');
-        nameOneInput.setAttribute('min-width','100px');
-        liTwo.appendChild(nameTwoInput);
-
-        const nameTwoButton = document.createElement('button');
-        nameTwoButton.setAttribute('type', 'submit');
-        nameTwoButton.setAttribute('name', 'name-two');
-        nameTwoButton.textContent = 'Enter!';
-        liTwo.appendChild(nameTwoButton);
     }
 
     return { playerOne, playerTwo, gameBoard, userInterface}

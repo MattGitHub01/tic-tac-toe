@@ -6,44 +6,6 @@ body {
     background-color: lightblue;
 }
 
-ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5rem;
-    list-style-type: none;
-}
-
-li {
-    margin: 2rem;
-    display: inline;
-}
-
-label {
-    margin-right: 2rem;
-}
-
-button {
-    border: 2px solid black;
-    border-radius: 15px;
-    background-color: lightblue;
-    font-family: cursive;
-    margin-left: 1rem;
-}
-
-button:hover {
-    border-color: white;
-    color: white;
-}
-
-input {
-    border: 2px solid black;
-    background-color: lightblue;
-    border-radius: 15px;
-    text-align: center;
-}
-
 .container {
     display: flex;
     width: 100vw;
