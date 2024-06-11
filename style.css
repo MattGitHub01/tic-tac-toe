@@ -1,15 +1,22 @@
 * {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+body {
+    background-color: lightblue ;
+}
 .container {
     display: flex;
+    width: 100vw;
+    height: 100vh;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    background-color: lightblue;
+    margin: -10px;
 }
 
 .display-area {
     margin-bottom: 4rem;
+    font-size: 3rem;
 }
 
 .grid-container {
@@ -22,13 +29,12 @@
 
 .grid-div {
     display: flex;
+
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    width: 10rem;
-    height: 10rem;
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
+    border-right: 5px solid black;
+    border-bottom: 5px solid black;
     font-size: 3rem;
 }
 

@@ -60,9 +60,43 @@ const newGame = (function() {
         displayArea.textContent = 'Tic-Tac-Toe!';
         container.appendChild(displayArea);
 
+        const contentContainer = document.createElement('div');
+        contentContainer.classList.add('content-container');
+        container.appendChild(contentContainer);
+
+        const nameFormDiv = document.createElement('div');
+        nameFormDiv.classList.add('name-form-div');
+        contentContainer.appendChild(nameFormDiv);
+
+        const nameForm = document.createElement('form');
+        nameForm.classList.add('name-form');
+        nameForm.setAttribute('id', 'name-form');
+        nameFormDiv.appendChild(nameForm);
+
+        const ul = document.createElement('ul');
+        ul.classList.add('form-ul');
+        nameForm.appendChild(ul);
+        // Below i can copy paste to make form
+        const liOne = document.createElement('li');
+        liOne.classList.add('form-li-one');
+        ul.appendChild(liOne);
+
+        const nameOneLabel = document.createElement('label');
+        nameOneLabel.setAttribute('for', 'name-one');
+        nameOneLabel.textContent = 'Player One Name';
+        liOne.appendChild(nameOneLabel);
+
+        const nameOneInput = document.createElement('input');
+        nameOneInput.setAttribute('type','text');
+        nameOneInput.setAttribute('id', 'name-one');
+        nameOneInput.setAttribute('name', 'name-one');
+        nameOneInput.setAttribute('id', 'name-one');
+        nameOneInput.setAttribute('required','');
+        liOne.appendChild(nameOneInput);
+
         const gridContainer = document.createElement('div');
         gridContainer.classList.add('grid-container');
-        container.appendChild(gridContainer);
+        contentContainer.appendChild(gridContainer);
         let divAmt = 9;
         let gmeBrdPos = 0;
         let turns = 9;
@@ -96,7 +130,7 @@ const newGame = (function() {
                         turns = 0;
                         displayArea.textContent = `Player Two Wins!`;
                     }
-                    if (turns <= 0 && playerOneWin == false) {
+                    if (turns <= 0 && playerOneWin == false && playerTwoWin == false) {
                         displayArea.textContent = `Tie!`;
                     }
                 }
@@ -123,7 +157,7 @@ const newGame = (function() {
                         turns = 0;
                         displayArea.textContent = `Player Two Wins!`;
                     }
-                    if (turns <= 0 && playerOneWin == false) {
+                    if (turns <= 0 && playerOneWin == false && playerTwoWin == false) {
 
                         displayArea.textContent = `Tie!`;
                     }
