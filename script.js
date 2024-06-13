@@ -53,7 +53,7 @@ const newGame = (function() {
     const nameButton = document.createElement('button');
 
     let boardKeys = Object.keys(gameBoard);
-    const userInterface = function() {
+    const startRound = function() {
         const container = document.querySelector('.container');
 
         const displayArea = document.createElement('div');
@@ -143,7 +143,7 @@ const newGame = (function() {
 
     }
 
-    return { playerOne, playerTwo, gameBoard, userInterface}
+    return { playerOne, playerTwo, gameBoard, startRound}
 })();
 
-newGame.userInterface()
+newGame.startRound()
